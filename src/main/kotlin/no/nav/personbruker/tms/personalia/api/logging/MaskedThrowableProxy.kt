@@ -1,4 +1,4 @@
-package no.nav.personbruker.template.api.logging
+package no.nav.personbruker.tms.personalia.api.logging
 
 import ch.qos.logback.classic.spi.IThrowableProxy
 import ch.qos.logback.classic.spi.StackTraceElementProxy

@@ -1,12 +1,12 @@
-package no.nav.personbruker.template.api.health
+package no.nav.personbruker.tms.personalia.api.health
 
 import io.ktor.application.*
 import io.ktor.html.*
 import io.ktor.http.*
 import kotlinx.coroutines.coroutineScope
 import kotlinx.html.*
-import no.nav.personbruker.template.api.config.Environment
-import no.nav.personbruker.template.api.config.HttpClientBuilder
+import no.nav.personbruker.tms.personalia.api.config.Environment
+import no.nav.personbruker.tms.personalia.api.config.HttpClientBuilder
 
 suspend fun ApplicationCall.buildSelftestPage(healthService: HealthService) = coroutineScope {
 

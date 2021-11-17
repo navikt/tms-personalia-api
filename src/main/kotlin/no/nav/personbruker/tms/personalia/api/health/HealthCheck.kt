@@ -1,4 +1,4 @@
-package no.nav.personbruker.template.api.health
+package no.nav.personbruker.tms.personalia.api.health
 
 interface HealthCheck {
 

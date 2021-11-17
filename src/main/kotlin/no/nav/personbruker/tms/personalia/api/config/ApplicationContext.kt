@@ -1,6 +1,6 @@
-package no.nav.personbruker.template.api.config
+package no.nav.personbruker.tms.personalia.api.config
 
-import no.nav.personbruker.template.api.health.HealthService
+import no.nav.personbruker.tms.personalia.api.health.HealthService
 
 class ApplicationContext {
 

@@ -1,4 +1,4 @@
-package no.nav.personbruker.template.api.config
+package no.nav.personbruker.tms.personalia.api.config
 
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -11,9 +11,9 @@ import io.ktor.routing.*
 import io.ktor.util.*
 import io.ktor.util.pipeline.*
 import io.prometheus.client.hotspot.DefaultExports
-import no.nav.personbruker.template.api.common.AuthenticatedUser
-import no.nav.personbruker.template.api.common.AuthenticatedUserFactory
-import no.nav.personbruker.template.api.health.healthApi
+import no.nav.personbruker.tms.personalia.api.common.AuthenticatedUser
+import no.nav.personbruker.tms.personalia.api.common.AuthenticatedUserFactory
+import no.nav.personbruker.tms.personalia.api.health.healthApi
 import no.nav.security.token.support.ktor.tokenValidationSupport
 
 @KtorExperimentalAPI

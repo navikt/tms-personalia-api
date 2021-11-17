@@ -1,4 +1,4 @@
-package no.nav.personbruker.template.api.config
+package no.nav.personbruker.tms.personalia.api.config
 
 data class Environment(
     val corsAllowedOrigins: String = getEnvVar("CORS_ALLOWED_ORIGINS")

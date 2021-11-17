@@ -1,6 +1,6 @@
-package no.nav.personbruker.template.api.health
+package no.nav.personbruker.tms.personalia.api.health
 
-import no.nav.personbruker.template.api.config.ApplicationContext
+import no.nav.personbruker.tms.personalia.api.config.ApplicationContext
 
 class HealthService(private val applicationContext: ApplicationContext) {
 
