@@ -7,7 +7,7 @@ services:
       - "9000:9000"
     environment:
       PORT: "9000"
-      CALLBACK_URL: "http://localhost:5000/callback"
+      CALLBACK_URL: "http://localhost:50000/callback"
       ISSUER: "https://localhost:9000"
 
   oidc-provider-gui:
