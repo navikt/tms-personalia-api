@@ -1,6 +1,6 @@
 {
   "namespace": "personbruker",
   "ingresses": [
-    "https://dittnav-ktor-template.dev.nav.no/person/dittnav-ktor-template"
+    "https://tms-personalia-api.dev.nav.no/person/tms-personalia-api"
   ]
 }

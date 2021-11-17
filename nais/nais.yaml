@@ -1,7 +1,7 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: dittnav-ktor-template
+  name: tms-personalia-api
   namespace: {{namespace}}
   labels:
     team: personbruker
@@ -11,14 +11,14 @@ spec:
   image: {{version}}
   port: 8080
   liveness:
-    path: /person/dittnav-ktor-template/internal/isAlive
+    path: /person/tms-personalia-api/internal/isAlive
     initialDelay: 10
   readiness:
-    path: /person/dittnav-ktor-template/internal/isReady
+    path: /person/tms-personalia-api/internal/isReady
     initialDelay: 10
   prometheus:
     enabled: true
-    path: /person/dittnav-ktor-template/metrics
+    path: /person/tms-personalia-api/metrics
   replicas:
     min: 2
     max: 4
