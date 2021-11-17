@@ -13,7 +13,7 @@ services:
   oidc-provider-gui:
     image: "docker.pkg.github.com/navikt/pb-oidc-provider-gui/pb-oidc-provider-gui:latest"
     ports:
-      - "5000:5000"
+      - "50000:50000"
     depends_on:
       - oidc-provider
     environment:
