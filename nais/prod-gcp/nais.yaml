@@ -22,7 +22,7 @@ spec:
     max: 4
   webproxy: true
   ingresses:
-    - "https://person.nav.no/tms-personalia-api"
+    - "https://person.intern.nav.no/tms-personalia-api"
   resources:
     limits:
       cpu: "3"
