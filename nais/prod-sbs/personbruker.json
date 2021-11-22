@@ -1,6 +1,0 @@
-{
-  "namespace": "personbruker",
-  "ingresses": [
-    "https://tms-personalia-api.nais.oera.no/person/tms-personalia-api"
-  ]
-}

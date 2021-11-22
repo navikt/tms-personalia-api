@@ -1,0 +1,32 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: tms-personalia-api
+  namespace: min-side
+  labels:
+    team: min-side
+spec:
+  image: {{version}}
+  port: 8080
+  liveness:
+    path: /tms-personalia-api/internal/isAlive
+    initialDelay: 15
+  readiness:
+    path: /tms-personalia-api/internal/isReady
+    initialDelay: 15
+  prometheus:
+    enabled: true
+    path: /tms-personalia-api/metrics
+  replicas:
+    min: 2
+    max: 4
+  webproxy: true
+  ingresses:
+    - "https://person.dev.nav.no/tms-personalia-api"
+  resources:
+    limits:
+      cpu: "3"
+      memory: 768Mi
+    requests:
+      cpu: "500m"
+      memory: 580Mi

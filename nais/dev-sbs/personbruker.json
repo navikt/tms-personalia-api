@@ -1,6 +1,0 @@
-{
-  "namespace": "personbruker",
-  "ingresses": [
-    "https://tms-personalia-api.dev.nav.no/person/tms-personalia-api"
-  ]
-}
