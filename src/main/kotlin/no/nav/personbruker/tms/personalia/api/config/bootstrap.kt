@@ -33,7 +33,9 @@ fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()
     val config = this.environment.config
 
     install(Authentication) {
-        tokenValidationSupport(config = config)
+        basic {
+
+        }
     }
 
     install(ContentNegotiation) {
