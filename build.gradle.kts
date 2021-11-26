@@ -40,6 +40,8 @@ dependencies {
     implementation(Ktor.jackson)
     implementation(Ktor.serverNetty)
     implementation(DittNAV.Common.utils)
+    implementation(Tms.KtorTokenSupport.tokendingsExchange)
+    implementation(Tms.KtorTokenSupport.tokenXValidation)
     implementation(Logback.classic)
     implementation(Logstash.logbackEncoder)
     implementation(NAV.tokenValidatorKtor)
@@ -82,6 +84,8 @@ tasks {
         environment("LOGINSERVICE_IDPORTEN_DISCOVERY_URL", "http://localhost:9000/.well-known/openid-configuration")
         environment("LOGINSERVICE_IDPORTEN_AUDIENCE", "stubOidcClient")
         environment("OIDC_CLAIM_CONTAINING_THE_IDENTITY", "pid")
+        environment("TOKEN_X_CLIENT_ID", "...")
+        environment("TOKEN_X_WELL_KNOWN_URL", "...")
 
         environment("NAIS_CLUSTER_NAME", "dev-sbs")
         environment("NAIS_NAMESPACE", "personbruker")

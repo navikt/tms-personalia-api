@@ -23,6 +23,8 @@ spec:
     min: 2
     max: 4
   webproxy: true
+  tokenx:
+    enabled: true
   ingresses:
     - "https://person.intern.nav.no/tms-personalia-api"
   resources:
