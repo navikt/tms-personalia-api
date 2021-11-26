@@ -49,7 +49,7 @@ fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()
 
         authenticate {
             get("/sikret") {
-                call.respondText(text = "Du er authentisert som $authenticatedUser.", contentType = ContentType.Text.Plain)
+                call.respondText(text = "Du er autentisert", contentType = ContentType.Text.Plain)
             }
         }
     }
