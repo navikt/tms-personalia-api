@@ -25,6 +25,12 @@ spec:
   webproxy: true
   tokenx:
     enabled: true
+  accessPolicy:
+    inbound:
+      rules:
+        - application: dittnav-api
+          namespace: personbruker
+          cluster: dev-sbs
   ingresses:
     - "https://person.dev.nav.no/tms-personalia-api"
   resources:
