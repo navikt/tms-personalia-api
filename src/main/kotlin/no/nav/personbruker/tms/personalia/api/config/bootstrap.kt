@@ -14,7 +14,7 @@ import io.prometheus.client.hotspot.DefaultExports
 import no.nav.personbruker.tms.personalia.api.common.AuthenticatedUser
 import no.nav.personbruker.tms.personalia.api.common.AuthenticatedUserFactory
 import no.nav.personbruker.tms.personalia.api.health.healthApi
-import no.nav.security.token.support.ktor.tokenValidationSupport
+import no.nav.tms.token.support.tokenx.validation.installTokenXAuth
 
 @KtorExperimentalAPI
 fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()) {
@@ -30,12 +30,8 @@ fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()
         header(HttpHeaders.ContentType)
     }
 
-    val config = this.environment.config
-
-    install(Authentication) {
-        basic {
-
-        }
+    installTokenXAuth {
+        setAsDefault = true
     }
 
     install(ContentNegotiation) {
@@ -53,7 +49,7 @@ fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()
 
         authenticate {
             get("/sikret") {
-                call.respondText(text = "Du er authentisert som $authenticatedUser.", contentType = ContentType.Text.Plain)
+                call.respondText(text = "Du er autentisert", contentType = ContentType.Text.Plain)
             }
         }
     }

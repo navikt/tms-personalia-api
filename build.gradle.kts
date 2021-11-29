@@ -40,6 +40,8 @@ dependencies {
     implementation(Ktor.jackson)
     implementation(Ktor.serverNetty)
     implementation(DittNAV.Common.utils)
+    implementation(Tms.KtorTokenSupport.tokendingsExchange)
+    implementation(Tms.KtorTokenSupport.tokenXValidation)
     implementation(Logback.classic)
     implementation(Logstash.logbackEncoder)
     implementation(NAV.tokenValidatorKtor)
