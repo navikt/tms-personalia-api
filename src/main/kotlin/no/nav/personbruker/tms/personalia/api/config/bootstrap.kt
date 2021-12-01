@@ -6,15 +6,14 @@ import io.ktor.client.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.jackson.*
-import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.util.*
 import io.ktor.util.pipeline.*
 import io.prometheus.client.hotspot.DefaultExports
-import no.nav.personbruker.tms.personalia.api.common.AuthenticatedUser
-import no.nav.personbruker.tms.personalia.api.common.AuthenticatedUserFactory
 import no.nav.personbruker.tms.personalia.api.health.healthApi
+import no.nav.personbruker.tms.personalia.api.personalia.personaliaApi
 import no.nav.tms.token.support.tokenx.validation.installTokenXAuth
+import no.nav.tms.token.support.tokenx.validation.user.TokenXUserFactory
 
 @KtorExperimentalAPI
 fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()) {
@@ -43,14 +42,8 @@ fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()
     routing {
         healthApi(appContext.healthService)
 
-        get("/usikret") {
-            call.respondText(text = "Usikret API.", contentType = ContentType.Text.Plain)
-        }
-
         authenticate {
-            get("/sikret") {
-                call.respondText(text = "Du er autentisert", contentType = ContentType.Text.Plain)
-            }
+            personaliaApi(appContext.personaliaService)
         }
     }
 
@@ -63,5 +56,5 @@ private fun Application.configureShutdownHook(httpClient: HttpClient) {
     }
 }
 
-val PipelineContext<Unit, ApplicationCall>.authenticatedUser: AuthenticatedUser
-    get() = AuthenticatedUserFactory.createNewAuthenticatedUser(call)
+val PipelineContext<*, ApplicationCall>.tokenXUser
+    get() = TokenXUserFactory.createTokenXUser(call)
