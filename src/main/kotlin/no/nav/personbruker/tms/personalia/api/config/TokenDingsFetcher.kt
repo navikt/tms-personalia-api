@@ -4,9 +4,9 @@ import no.nav.tms.token.support.tokendings.exchange.TokendingsService
 
 class TokendingsTokenFetcher(
     private val tokendingsService: TokendingsService,
-    private val PDLClientId: String
+    private val pdlClientId: String
 ) {
-    suspend fun getPDLToken(userToken: String): String {
-        return tokendingsService.exchangeToken(userToken, PDLClientId)
+    suspend fun getPdlToken(userToken: String): String {
+        return tokendingsService.exchangeToken(userToken, pdlClientId)
     }
 }
