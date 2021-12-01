@@ -1,19 +1,15 @@
 # tms-personalia-api
 
-Kan brukes som utgangspunkt for å opprette nye Ktor-apper for Team DittNAV.
+tms-personalia-api er en proxy mellom dittnav-api fra pdl.
 
-# Tilpasse repo-et
-1. Søk etter og erstatt `tms-personalia-api` med det som skal være navnet på den nye appen.
-2. Skift navnet på mappen `src/main/kotlin/no/nav/personbruker/template` til noe som passer for den nye appen. NB! unngå bidestreker i navnet.
-3. Oppdatert pakkenavnene, søk etter og erstatt `personbruker.teamplate.api` med `personbruker.<mappenavnet fra steg to>.api`.
-4. Verifiser at appen kan starte, som beskrevet i #kom
+Denne applikasjonen tilbyr et rest-endepunkt hvor man kan hente navn og ident.
 
 # Kom i gang
 1. Bygg tms-personalia-api ved å kjøre `gradle build`
 1. Start appens avhengigheter ved å kjøre `docker-compose up -d`
 1. Start appen lokalt ved å kjøre `gradle runServer`
-1. Appen nås på `http://localhost:8101/person/tms-personalia-api`
-   * F.eks. via `curl http://localhost:8101/person/tms-personalia-api/internal/isAlive`
+1. Appen nås på `http://localhost:8101/tms-personalia-api`
+   * F.eks. via `curl http://localhost:8101/tms-personalia-api/internal/isAlive`
 
 # Henvendelser
 
