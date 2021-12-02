@@ -1,6 +1,6 @@
 # tms-personalia-api
 
-tms-personalia-api er en proxy mellom dittnav-api fra pdl.
+tms-personalia-api er en proxy mellom dittnav-api og pdl.
 
 Denne applikasjonen tilbyr et rest-endepunkt hvor man kan hente navn og ident.
 
