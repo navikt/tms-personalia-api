@@ -5,8 +5,8 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import no.nav.personbruker.tms.personalia.api.common.readObject
 import no.nav.personbruker.tms.personalia.api.config.JsonDeserialize.objectMapper
-import no.nav.personbruker.tms.personalia.api.personalia.exception.PdlAuthenticationException
-import no.nav.personbruker.tms.personalia.api.personalia.exception.PdlException
+import no.nav.personbruker.tms.personalia.api.common.exception.PdlAuthenticationException
+import no.nav.personbruker.tms.personalia.api.common.exception.PdlException
 import no.nav.personbruker.tms.personalia.api.personalia.pdl.PDLErrorType
 import no.nav.personbruker.tms.personalia.api.personalia.pdl.PdlErrorResponse
 import no.nav.personbruker.tms.personalia.api.personalia.pdl.PdlPersonInfo
