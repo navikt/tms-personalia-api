@@ -4,7 +4,6 @@ import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getEnvVar
 import java.net.URL
 
 data class Environment(
-    val corsAllowedOrigins: String = getEnvVar("CORS_ALLOWED_ORIGINS"),
     val pdlUrl: URL = URL(getEnvVar("PDL_BASE_URL")),
     val pdlClientId: String = getEnvVar("PDL_CLIENT_ID")
 )

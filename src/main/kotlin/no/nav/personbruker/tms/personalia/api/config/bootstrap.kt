@@ -4,7 +4,6 @@ import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.client.*
 import io.ktor.features.*
-import io.ktor.http.*
 import io.ktor.jackson.*
 import io.ktor.routing.*
 import io.ktor.util.*
@@ -17,17 +16,9 @@ import no.nav.tms.token.support.tokenx.validation.user.TokenXUserFactory
 
 @KtorExperimentalAPI
 fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()) {
-    val environment = Environment()
-
     DefaultExports.initialize()
 
     install(DefaultHeaders)
-
-    install(CORS) {
-        host(environment.corsAllowedOrigins)
-        allowCredentials = true
-        header(HttpHeaders.ContentType)
-    }
 
     installTokenXAuth {
         setAsDefault = true
