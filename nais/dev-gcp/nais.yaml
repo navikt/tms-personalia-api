@@ -31,6 +31,9 @@ spec:
         - application: dittnav-api
           namespace: personbruker
           cluster: dev-sbs
+    outbound:
+      external:
+        - host: pdl-api.dev-fss-pub.nais.io
   ingresses:
     - "https://person.dev.nav.no/tms-personalia-api"
   resources:
