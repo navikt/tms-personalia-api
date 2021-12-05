@@ -13,11 +13,10 @@ import no.nav.personbruker.tms.personalia.api.personalia.pdl.PdlPersonInfo
 import no.nav.personbruker.tms.personalia.api.personalia.pdl.PdlResponse
 import no.nav.personbruker.tms.personalia.api.personalia.query.*
 import org.slf4j.LoggerFactory
-import java.net.URL
 
 class PersonaliaConsumer (
     private val client: HttpClient,
-    private val pdlUrl: URL
+    private val pdlUrl: String
 ) {
 
     val log = LoggerFactory.getLogger(PersonaliaConsumer::class.java)
