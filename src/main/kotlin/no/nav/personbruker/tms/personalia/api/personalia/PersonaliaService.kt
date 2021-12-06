@@ -8,11 +8,12 @@ class PersonaliaService(
     private val tokendingsTokenFetcher: TokendingsTokenFetcher
 ) {
 
-    suspend fun fetchNavn(user: TokenXUser): PersonaliaNavn {
+    suspend fun fetchNavn(user: TokenXUser): PersonaliaNavnDTO {
         val token = tokendingsTokenFetcher.getPdlToken(user.tokenString)
-        val personInfo = personaliaConsumer.fetchNavn(token, user.ident)
+        val external = personaliaConsumer.fetchNavn(token, user.ident)
+        val externalNavn = external.navn.first()
 
-        return personInfo.navn.first()
+        return externalNavn.toPersonaliaNavnDTO()
     }
 
     fun extractIdent(user: TokenXUser): PersonaliaIdent {
