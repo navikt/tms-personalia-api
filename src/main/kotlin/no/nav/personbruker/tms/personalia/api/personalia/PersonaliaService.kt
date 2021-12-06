@@ -10,7 +10,7 @@ class PersonaliaService(
 
     suspend fun fetchNavn(user: TokenXUser): PersonaliaNavn {
         val token = tokendingsTokenFetcher.getPdlToken(user.tokenString)
-        val personInfo = personaliaConsumer.fetchNavn(token, user.ident)
+        val personInfo = personaliaConsumer.fetchNavn(user.ident, token)
 
         return personInfo.navn.first()
     }
