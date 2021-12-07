@@ -35,7 +35,7 @@ spec:
       external:
         - host: pdl-api.prod-fss-pub.nais.io
   ingresses:
-    - "https://person.intern.nav.no/tms-personalia-api"
+    - "https://person.nav.no/tms-personalia-api"
   resources:
     limits:
       cpu: "3"
