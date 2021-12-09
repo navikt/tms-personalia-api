@@ -3,15 +3,15 @@ package no.nav.personbruker.tms.personalia.api.personalia
 import com.expediagroup.graphql.client.types.GraphQLClientResponse
 import no.nav.pdl.generated.dto.HentNavn
 
-fun PersonaliaNavn.toPersonaliaNavnDTO(): PersonaliaNavnDTO {
-    return PersonaliaNavnDTO(
+fun Navn.toInternalNavnDTO(): NavnDTO {
+    return NavnDTO(
         navn = concatenateToNavn(fornavn, mellomnavn, etternavn)
     )
 }
 
-fun toPersonaliaNavn(result: GraphQLClientResponse<HentNavn.Result>) =
+fun toExternalNavn(result: GraphQLClientResponse<HentNavn.Result>) =
     result.data?.hentPerson?.navn?.map {
-        PersonaliaNavn(
+        Navn(
             fornavn = it.fornavn,
             mellomnavn = it.mellomnavn,
             etternavn = it.etternavn
