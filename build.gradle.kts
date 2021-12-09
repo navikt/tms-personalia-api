@@ -1,3 +1,4 @@
+import com.expediagroup.graphql.plugin.gradle.config.GraphQLSerializer
 import com.expediagroup.graphql.plugin.gradle.graphql
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -102,6 +103,7 @@ graphql {
         packageName = "no.nav.pdl.generated.dto"
         schemaFile = file("${project.projectDir}/src/main/resources/graphql/schema.graphql")
         queryFileDirectory = "${project.projectDir}/src/main/resources/graphql"
+        serializer = GraphQLSerializer.KOTLINX
     }
 }
 
