@@ -1,4 +1,4 @@
-package no.nav.personbruker.tms.personalia.api.personalia
+package no.nav.personbruker.tms.personalia.api.navn
 
 import com.expediagroup.graphql.client.types.GraphQLClientResponse
 import no.nav.pdl.generated.dto.HentNavn

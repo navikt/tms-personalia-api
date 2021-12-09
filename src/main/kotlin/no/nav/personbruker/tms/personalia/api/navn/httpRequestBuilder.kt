@@ -1,4 +1,4 @@
-package no.nav.personbruker.tms.personalia.api.personalia
+package no.nav.personbruker.tms.personalia.api.navn
 
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
@@ -8,6 +8,6 @@ fun HttpRequestBuilder.bearerHeader(token: String, headerKey: String = HttpHeade
     header(headerKey, "Bearer $token")
 }
 
-fun HttpRequestBuilder.temaHeader(temakode: String) {
-    header("Tema", temakode)
+fun HttpRequestBuilder.temaHeader() {
+    header("Tema", "GEN")
 }

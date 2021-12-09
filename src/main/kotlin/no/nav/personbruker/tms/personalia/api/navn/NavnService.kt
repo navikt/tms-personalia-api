@@ -1,22 +1,20 @@
-package no.nav.personbruker.tms.personalia.api.personalia
+package no.nav.personbruker.tms.personalia.api.navn
 
 import no.nav.personbruker.tms.personalia.api.config.TokendingsTokenFetcher
+import no.nav.personbruker.tms.personalia.api.ident.Ident
 import no.nav.tms.token.support.tokenx.validation.user.TokenXUser
 
-class PersonaliaService(
-    private val personaliaConsumer: PersonaliaConsumer,
+class NavnService(
+    private val navnConsumer: NavnConsumer,
     private val tokendingsTokenFetcher: TokendingsTokenFetcher
 ) {
 
     suspend fun fetchNavn(user: TokenXUser): NavnDTO {
         val token = tokendingsTokenFetcher.getPdlToken(user.tokenString)
-        val response = personaliaConsumer.fetchNavn(user.ident, token)
+        val response = navnConsumer.fetchNavn(user.ident, token)
         val external = toExternalNavn(response).first()
 
         return external.toInternalNavnDTO()
     }
 
-    fun extractIdent(user: TokenXUser): Ident {
-        return Ident(user.ident)
-    }
 }

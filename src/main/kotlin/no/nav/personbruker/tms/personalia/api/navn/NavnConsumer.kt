@@ -1,4 +1,4 @@
-package no.nav.personbruker.tms.personalia.api.personalia
+package no.nav.personbruker.tms.personalia.api.navn
 
 import com.expediagroup.graphql.client.ktor.GraphQLKtorClient
 import com.expediagroup.graphql.client.types.GraphQLClientError
@@ -9,12 +9,12 @@ import no.nav.personbruker.tms.personalia.api.common.exception.QueryRequestExcep
 import no.nav.personbruker.tms.personalia.api.common.exception.QueryResponseException
 import org.slf4j.LoggerFactory
 
-class PersonaliaConsumer (
+class NavnConsumer (
     private val client: GraphQLKtorClient,
     private val pdlUrl: String
 ) {
 
-    val log = LoggerFactory.getLogger(PersonaliaConsumer::class.java)
+    val log = LoggerFactory.getLogger(NavnConsumer::class.java)
 
     suspend fun fetchNavn(ident: String, token: String): GraphQLClientResponse<HentNavn.Result> {
         val response: GraphQLClientResponse<HentNavn.Result> = sendQuery(ident, token)
@@ -30,7 +30,7 @@ class PersonaliaConsumer (
             return client.execute(hentNavnQuery) {
                 url(pdlUrl)
                 bearerHeader(token)
-                temaHeader("GEN")
+                temaHeader()
             }
         } catch (e: Exception) {
             throw QueryRequestException("Feil under sending av graphql spørringen", e)
