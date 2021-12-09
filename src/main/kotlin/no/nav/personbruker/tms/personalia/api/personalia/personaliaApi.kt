@@ -4,6 +4,7 @@ import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import no.nav.personbruker.tms.personalia.api.common.ExceptionResponseHandler
 import no.nav.personbruker.tms.personalia.api.config.tokenXUser
 import org.slf4j.LoggerFactory
 
@@ -17,8 +18,8 @@ fun Route.personaliaApi(personaliaService: PersonaliaService) {
             call.respond(HttpStatusCode.OK, result)
 
         } catch (exception: Exception) {
-            call.respond(HttpStatusCode.InternalServerError)
-            log.warn("Klarte ikke å hente navn. $exception.message", exception)
+            val errorCode = ExceptionResponseHandler.logExceptionAndDecideErrorResponseCode(log, exception)
+            call.respond(errorCode)
         }
     }
 
@@ -28,8 +29,8 @@ fun Route.personaliaApi(personaliaService: PersonaliaService) {
             call.respond(HttpStatusCode.OK, result)
 
         } catch (exception: Exception) {
-            call.respond(HttpStatusCode.InternalServerError)
-            log.warn("Klarte ikke å hente ident. $exception.message", exception)
+            val errorCode = ExceptionResponseHandler.logExceptionAndDecideErrorResponseCode(log, exception)
+            call.respond(errorCode)
         }
     }
 }
