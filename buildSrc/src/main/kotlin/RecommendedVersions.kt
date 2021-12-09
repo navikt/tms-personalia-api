@@ -12,6 +12,14 @@ object Bouncycastle {
     const val bcprovJdk15on = "org.bouncycastle:bcprov-jdk15on:$version"
 }
 
+object GraphQL {
+    const val version = "5.2.0"
+    private const val groupId = "com.expediagroup"
+    const val pluginId = "com.expediagroup.graphql"
+
+    const val client = "$groupId:graphql-kotlin-ktor-client:$version"
+}
+
 object Brukernotifikasjon {
     private const val version = "ekstern-varsling-SNAPSHOT"
     const val schemas = "com.github.navikt:brukernotifikasjon-schemas:$version"

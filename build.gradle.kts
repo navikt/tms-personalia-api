@@ -1,3 +1,4 @@
+import com.expediagroup.graphql.plugin.gradle.graphql
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -6,6 +7,7 @@ plugins {
     kotlin("jvm").version(Kotlin.version)
     kotlin("plugin.allopen").version(Kotlin.version)
 
+    id(GraphQL.pluginId) version GraphQL.version
     id(Shadow.pluginId) version (Shadow.version)
     // Apply the application plugin to add support for building a CLI application.
     application
@@ -44,11 +46,11 @@ dependencies {
     implementation(Tms.KtorTokenSupport.tokenXValidation)
     implementation(Logback.classic)
     implementation(Logstash.logbackEncoder)
+    implementation(GraphQL.client)
     implementation(NAV.tokenValidatorKtor)
     implementation(Prometheus.common)
     implementation(Prometheus.hotspot)
     implementation(Prometheus.logback)
-
 
     testImplementation(Junit.api)
     testImplementation(Ktor.clientMock)
@@ -92,6 +94,14 @@ tasks {
 
         main = application.mainClassName
         classpath = sourceSets["main"].runtimeClasspath
+    }
+}
+
+graphql {
+    client {
+        packageName = "no.nav.pdl.generated.dto"
+        schemaFile = file("${project.projectDir}/src/main/resources/graphql/schema.graphql")
+        queryFileDirectory = "${project.projectDir}/src/main/resources/graphql"
     }
 }
 

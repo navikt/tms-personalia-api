@@ -10,10 +10,10 @@ class PersonaliaService(
 
     suspend fun fetchNavn(user: TokenXUser): PersonaliaNavnDTO {
         val token = tokendingsTokenFetcher.getPdlToken(user.tokenString)
-        val external = personaliaConsumer.fetchNavn(user.ident, token)
-        val externalNavn = external.navn.first()
+        val response = personaliaConsumer.fetchNavn(user.ident, token)
+        val external = toPersonaliaNavn(response).first()
 
-        return externalNavn.toPersonaliaNavnDTO()
+        return external.toPersonaliaNavnDTO()
     }
 
     fun extractIdent(user: TokenXUser): PersonaliaIdent {

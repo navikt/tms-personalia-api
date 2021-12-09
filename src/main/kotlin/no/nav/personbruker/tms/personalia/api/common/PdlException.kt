@@ -1,4 +1,4 @@
-package no.nav.personbruker.tms.personalia.api.common.exception
+package no.nav.personbruker.tms.personalia.api.common
 
 open class PdlException : Exception {
     constructor() : super()
