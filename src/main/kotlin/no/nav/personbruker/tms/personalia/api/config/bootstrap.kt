@@ -10,7 +10,8 @@ import io.ktor.util.*
 import io.ktor.util.pipeline.*
 import io.prometheus.client.hotspot.DefaultExports
 import no.nav.personbruker.tms.personalia.api.health.healthApi
-import no.nav.personbruker.tms.personalia.api.personalia.personaliaApi
+import no.nav.personbruker.tms.personalia.api.ident.identApi
+import no.nav.personbruker.tms.personalia.api.navn.navnApi
 import no.nav.tms.token.support.tokenx.validation.installTokenXAuth
 import no.nav.tms.token.support.tokenx.validation.user.TokenXUserFactory
 
@@ -34,7 +35,8 @@ fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()
         healthApi(appContext.healthService)
 
         authenticate {
-            personaliaApi(appContext.personaliaService)
+            identApi(appContext.identService)
+            navnApi(appContext.navnService)
         }
     }
 
