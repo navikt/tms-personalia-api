@@ -6,12 +6,11 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import no.nav.personbruker.tms.personalia.api.common.ExceptionResponseHandler
 import no.nav.personbruker.tms.personalia.api.config.tokenXUser
-import no.nav.personbruker.tms.personalia.api.navn.NavnService
 import org.slf4j.LoggerFactory
 
 fun Route.identApi(identService: IdentService) {
 
-    val log = LoggerFactory.getLogger(NavnService::class.java)
+    val log = LoggerFactory.getLogger(IdentService::class.java)
 
     get("/ident") {
         try {
