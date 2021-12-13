@@ -2,6 +2,7 @@ package no.nav.personbruker.tms.personalia.api.navn
 
 import com.expediagroup.graphql.client.types.GraphQLClientResponse
 import no.nav.pdl.generated.dto.HentNavn
+import no.nav.personbruker.tms.personalia.api.common.exception.TransformationException
 
 fun Navn.toInternalNavnDTO(): NavnDTO {
     return NavnDTO(
@@ -16,7 +17,7 @@ fun toExternalNavn(result: GraphQLClientResponse<HentNavn.Result>) =
             mellomnavn = it.mellomnavn,
             etternavn = it.etternavn
         )
-    } ?: emptyList()
+    } ?: throw TransformationException("Klarte ikke å transformere responsen til Navn")
 
 private fun concatenateToNavn(fornavn: String?, mellomnavn: String?, etternavn: String?): String {
     return listOf(fornavn, mellomnavn, etternavn)
