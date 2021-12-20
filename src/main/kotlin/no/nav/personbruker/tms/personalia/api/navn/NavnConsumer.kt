@@ -35,7 +35,6 @@ class NavnConsumer (
         } catch (e: Exception) {
             throw QueryRequestException("Feil under sending av graphql spørringen", e)
         }
-
     }
 
     private fun checkForErrors(response: GraphQLClientResponse<HentNavn.Result>) {
