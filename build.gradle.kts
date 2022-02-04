@@ -20,9 +20,7 @@ tasks.withType<KotlinCompile> {
 }
 
 repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
     maven("https://packages.confluent.io/maven")
     maven("https://jitpack.io")
     mavenLocal()
@@ -48,7 +46,7 @@ dependencies {
     implementation(Tms.KtorTokenSupport.tokenXValidation)
     implementation(Logback.classic)
     implementation(Logstash.logbackEncoder)
-    implementation(GraphQL.client)
+    implementation(GraphQL.kotlinKtorClient)
     implementation(NAV.tokenValidatorKtor)
     implementation(Prometheus.common)
     implementation(Prometheus.hotspot)

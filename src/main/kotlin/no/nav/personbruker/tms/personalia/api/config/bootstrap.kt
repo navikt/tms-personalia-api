@@ -6,7 +6,6 @@ import io.ktor.client.*
 import io.ktor.features.*
 import io.ktor.jackson.*
 import io.ktor.routing.*
-import io.ktor.util.*
 import io.ktor.util.pipeline.*
 import io.prometheus.client.hotspot.DefaultExports
 import no.nav.personbruker.tms.personalia.api.health.healthApi
@@ -15,7 +14,6 @@ import no.nav.personbruker.tms.personalia.api.navn.navnApi
 import no.nav.tms.token.support.tokenx.validation.installTokenXAuth
 import no.nav.tms.token.support.tokenx.validation.user.TokenXUserFactory
 
-@KtorExperimentalAPI
 fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()) {
     DefaultExports.initialize()
 
