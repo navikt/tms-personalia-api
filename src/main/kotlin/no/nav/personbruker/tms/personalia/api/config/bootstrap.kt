@@ -8,6 +8,7 @@ import io.ktor.jackson.*
 import io.ktor.routing.*
 import io.ktor.util.pipeline.*
 import io.prometheus.client.hotspot.DefaultExports
+import no.nav.personbruker.tms.personalia.api.dittnav.dittnavApi
 import no.nav.personbruker.tms.personalia.api.health.healthApi
 import no.nav.personbruker.tms.personalia.api.ident.identApi
 import no.nav.personbruker.tms.personalia.api.navn.navnApi
@@ -35,6 +36,7 @@ fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()
         authenticate {
             identApi(appContext.identService)
             navnApi(appContext.navnService)
+            dittnavApi()
         }
     }
 
