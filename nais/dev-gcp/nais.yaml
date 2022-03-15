@@ -28,6 +28,7 @@ spec:
   accessPolicy:
     inbound:
       rules:
+        - application: tms-min-side-proxy
         - application: dittnav-api
           namespace: personbruker
           cluster: dev-sbs
