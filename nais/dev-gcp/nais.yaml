@@ -29,6 +29,7 @@ spec:
     inbound:
       rules:
         - application: dittnav-api
+        - application: dittnav-api
           namespace: personbruker
           cluster: dev-sbs
         - application: dittnav-api
