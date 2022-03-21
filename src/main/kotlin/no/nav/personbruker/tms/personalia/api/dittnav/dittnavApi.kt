@@ -22,4 +22,14 @@ fun Route.dittnavApi() {
         }
     }
 
+    post("/test") {
+        try {
+            call.respond(HttpStatusCode.OK, "It worked!")
+
+        } catch (exception: Exception) {
+            val errorCode = ExceptionResponseHandler.logExceptionAndDecideErrorResponseCode(log, exception)
+            call.respond(errorCode)
+        }
+    }
+
 }
