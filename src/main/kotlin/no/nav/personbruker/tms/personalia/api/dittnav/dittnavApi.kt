@@ -25,6 +25,7 @@ fun Route.dittnavApi() {
 
     post("/test") {
         try {
+            log.warn("Text: $call.receiveText()")
             val helloWorld = call.receive<HelloWorld>()
             log.warn("Object: $helloWorld")
             call.respond(HttpStatusCode.OK, "It worked!")
