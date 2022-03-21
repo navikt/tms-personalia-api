@@ -2,6 +2,7 @@ package no.nav.personbruker.tms.personalia.api.dittnav
 
 import io.ktor.application.*
 import io.ktor.http.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import no.nav.personbruker.tms.personalia.api.common.ExceptionResponseHandler
@@ -24,6 +25,8 @@ fun Route.dittnavApi() {
 
     post("/test") {
         try {
+            val helloWorld = call.receive<HelloWorld>()
+            log.info("Object: $helloWorld")
             call.respond(HttpStatusCode.OK, "It worked!")
 
         } catch (exception: Exception) {
