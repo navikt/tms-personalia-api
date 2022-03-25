@@ -30,6 +30,7 @@ spec:
       rules:
         - application: tms-min-side-proxy
         - application: dittnav-api
+        - application: dittnav-api
           namespace: personbruker
           cluster: dev-sbs
         - application: dittnav-api
