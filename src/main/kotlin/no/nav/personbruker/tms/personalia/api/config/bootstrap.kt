@@ -48,4 +48,4 @@ private fun Application.configureShutdownHook(httpClient: HttpClient) {
 }
 
 val PipelineContext<*, ApplicationCall>.tokenXUser
-    get() = TokenXUserFactory.createTokenXUser(call, "sub")
+    get() = TokenXUserFactory.createTokenXUser(call)
