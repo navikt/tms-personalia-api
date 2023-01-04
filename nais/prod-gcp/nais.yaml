@@ -29,9 +29,7 @@ spec:
     inbound:
       rules:
         - application: dittnav-api
-        - application: dittnav-api
-          namespace: personbruker
-          cluster: prod-sbs
+        - application: tms-min-side-proxy
     outbound:
       external:
         - host: pdl-api.prod-fss-pub.nais.io
