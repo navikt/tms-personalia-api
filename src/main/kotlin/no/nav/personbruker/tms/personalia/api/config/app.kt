@@ -49,11 +49,13 @@ fun Application.personaliaApi(
     }
 
     routing {
-        healthApi()
+        route("tms-personalia-api") {
+            healthApi()
 
-        authenticate {
-            identApi()
-            navnApi(navnService)
+            authenticate {
+                identApi()
+                navnApi(navnService)
+            }
         }
     }
 
