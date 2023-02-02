@@ -21,30 +21,26 @@ tasks.withType<KotlinCompile> {
 
 repositories {
     mavenCentral()
-    maven("https://packages.confluent.io/maven")
     maven("https://jitpack.io")
     mavenLocal()
 }
 
 dependencies {
-    implementation(Jackson.dataTypeJsr310)
+    implementation(JacksonDatatype.datatypeJsr310)
     implementation(Kotlinx.coroutines)
     implementation(Kotlinx.htmlJvm)
-    implementation(Ktor.auth)
-    implementation(Ktor.authJwt)
-    implementation(Ktor.clientApache)
-    implementation(Ktor.clientJackson)
-    implementation(Ktor.clientJson)
-    implementation(Ktor.clientLogging)
-    implementation(Ktor.clientLoggingJvm)
-    implementation(Ktor.clientSerializationJvm)
-    implementation(Ktor.htmlBuilder)
-    implementation(Ktor.jackson)
-    implementation(Ktor.serverNetty)
-    implementation(DittNAV.Common.utils)
-    implementation(Tms.KtorTokenSupport.tokendingsExchange)
-    implementation(Tms.KtorTokenSupport.tokenXValidation)
-    implementation(Logback.classic)
+    implementation(KotlinLogging.logging)
+    implementation(Ktor2.Server.auth)
+    implementation(Ktor2.Server.authJwt)
+    implementation(Ktor2.Server.defaultHeaders)
+    implementation(Ktor2.Client.apache)
+    implementation(Ktor2.Client.contentNegotiation)
+    implementation(Ktor2.Serialization.kotlinX)
+    implementation(Ktor2.Server.contentNegotiation)
+    implementation(Ktor2.Server.netty)
+    implementation(DittNAVCommonLib.utils)
+    implementation(TmsKtorTokenSupport.tokendingsExchange)
+    implementation(TmsKtorTokenSupport.tokenXValidation)
     implementation(Logstash.logbackEncoder)
     implementation(GraphQL.kotlinKtorClient)
     implementation(NAV.tokenValidatorKtor)
@@ -76,24 +72,6 @@ tasks {
             exceptionFormat = TestExceptionFormat.FULL
             events("passed", "skipped", "failed")
         }
-    }
-
-    register("runServer", JavaExec::class) {
-        println("Setting default environment variables for running with DittNAV docker-compose")
-
-        environment("CORS_ALLOWED_ORIGINS", "localhost:9002")
-
-        environment("LOGINSERVICE_IDPORTEN_DISCOVERY_URL", "http://localhost:9000/.well-known/openid-configuration")
-        environment("LOGINSERVICE_IDPORTEN_AUDIENCE", "stubOidcClient")
-        environment("OIDC_CLAIM_CONTAINING_THE_IDENTITY", "pid")
-
-        environment("NAIS_CLUSTER_NAME", "dev-sbs")
-        environment("NAIS_NAMESPACE", "personbruker")
-        environment("SENSU_HOST", "stub")
-        environment("SENSU_PORT", "")
-
-        main = application.mainClassName
-        classpath = sourceSets["main"].runtimeClasspath
     }
 }
 

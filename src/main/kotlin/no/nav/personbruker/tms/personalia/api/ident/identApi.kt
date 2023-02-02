@@ -1,21 +1,22 @@
 package no.nav.personbruker.tms.personalia.api.ident
 
-import io.ktor.application.*
 import io.ktor.http.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import io.ktor.util.pipeline.*
+import mu.KotlinLogging
 import no.nav.personbruker.tms.personalia.api.common.ExceptionResponseHandler
 import no.nav.personbruker.tms.personalia.api.config.tokenXUser
-import org.slf4j.LoggerFactory
+import no.nav.tms.token.support.tokenx.validation.user.TokenXUserFactory
 
-fun Route.identApi(identService: IdentService) {
+fun Route.identApi() {
 
-    val log = LoggerFactory.getLogger(IdentService::class.java)
+    val log = KotlinLogging.logger {}
 
     get("/ident") {
         try {
-            val result = identService.extractIdent(tokenXUser)
-            call.respond(HttpStatusCode.OK, result)
+            call.respond(HttpStatusCode.OK, tokenXUser.ident)
 
         } catch (exception: Exception) {
             val errorCode = ExceptionResponseHandler.logExceptionAndDecideErrorResponseCode(log, exception)
