@@ -1,7 +1,6 @@
 package no.nav.personbruker.tms.personalia.api.config
 
 import com.expediagroup.graphql.client.ktor.GraphQLKtorClient
-import io.ktor.auth.*
 import io.ktor.client.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*

@@ -62,7 +62,7 @@ dependencies {
 }
 
 application {
-    mainClassName = "io.ktor.server.netty.EngineMain"
+    mainClass.set("no.nav.personbruker.tms.personalia.api.config.AppKt")
 }
 
 tasks {
