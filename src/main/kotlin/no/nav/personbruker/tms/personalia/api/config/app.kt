@@ -49,7 +49,7 @@ fun Application.personaliaApi(
     }
 
     routing {
-        route("tms-personalia-api") {
+        route("/tms-personalia-api") {
             healthApi()
 
             authenticate {

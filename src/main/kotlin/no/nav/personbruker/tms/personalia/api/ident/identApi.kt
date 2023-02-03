@@ -14,7 +14,7 @@ fun Route.identApi() {
 
     get("/ident") {
         try {
-            call.respond(HttpStatusCode.OK, tokenXUser.ident)
+            call.respond(HttpStatusCode.OK, IdentDto(tokenXUser.ident))
 
         } catch (exception: Exception) {
             val errorCode = ExceptionResponseHandler.logExceptionAndDecideErrorResponseCode(log, exception)
