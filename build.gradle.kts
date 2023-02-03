@@ -42,7 +42,7 @@ dependencies {
     implementation(TmsKtorTokenSupport.tokendingsExchange)
     implementation(TmsKtorTokenSupport.tokenXValidation)
     implementation(Logstash.logbackEncoder)
-    implementation(GraphQL.kotlinKtorClient)
+    implementation(GraphQL6.kotlinKtorClient)
     implementation(NAV.tokenValidatorKtor)
     implementation(Prometheus.common)
     implementation(Prometheus.hotspot)
