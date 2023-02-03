@@ -1,19 +1,26 @@
 package no.nav.personbruker.tms.personalia.api.config
 
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.*
 import io.ktor.client.engine.apache.Apache
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.HttpTimeout
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.json.Json
 
 object HttpClientBuilder {
 
-    fun build(): HttpClient {
-        return HttpClient(Apache) {
-            install(JsonFeature) {
-                serializer = buildJsonSerializer()
+    fun build(httpClientEngine: HttpClientEngine = Apache.create()): HttpClient {
+        return HttpClient(httpClientEngine) {
+            install(ContentNegotiation) {
+                json(jsonConfig())
             }
             install(HttpTimeout)
         }
     }
+}
 
+fun jsonConfig() = Json {
+    this.ignoreUnknownKeys = true
+    this.encodeDefaults = true
 }
