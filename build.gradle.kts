@@ -65,7 +65,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("no.nav.personbruker.tms.personalia.api.config.AppKt")
+    mainClass.set("no.nav.personbruker.tms.personalia.api.AppKt")
 }
 
 tasks {

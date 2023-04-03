@@ -1,4 +1,4 @@
-package no.nav.personbruker.tms.personalia.api.config
+package no.nav.personbruker.tms.personalia.api
 
 import com.expediagroup.graphql.client.ktor.GraphQLKtorClient
 import io.ktor.client.*
@@ -13,10 +13,12 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.routing.*
 import io.ktor.util.pipeline.*
 import io.prometheus.client.hotspot.DefaultExports
-import no.nav.personbruker.tms.personalia.api.ident.identApi
+import no.nav.personbruker.tms.personalia.api.config.Environment
+import no.nav.personbruker.tms.personalia.api.config.HttpClientBuilder
+import no.nav.personbruker.tms.personalia.api.config.confiureStatusPages
+import no.nav.personbruker.tms.personalia.api.config.healthApi
+import no.nav.personbruker.tms.personalia.api.config.jsonConfig
 import no.nav.personbruker.tms.personalia.api.navn.NavnConsumer
-import no.nav.personbruker.tms.personalia.api.navn.NavnService
-import no.nav.personbruker.tms.personalia.api.navn.navnApi
 import no.nav.tms.token.support.tokendings.exchange.TokendingsServiceBuilder
 import no.nav.tms.token.support.tokenx.validation.installTokenXAuth
 import no.nav.tms.token.support.tokenx.validation.user.TokenXUserFactory
@@ -27,19 +29,25 @@ fun main() {
 
     val httpClient = HttpClientBuilder.build()
     val tokendingsService = TokendingsServiceBuilder.buildTokendingsService(maxCachedEntries = 10000)
-    val tokendingsTokenFetcher = TokendingsTokenFetcher(tokendingsService, environment.pdlClientId)
-
-    val navnConsumer = NavnConsumer(GraphQLKtorClient(URL(environment.pdlUrl), httpClient), environment.pdlUrl)
-
+    val navnConsumer = NavnConsumer(
+        client = GraphQLKtorClient(url = URL(environment.pdlUrl), httpClient = httpClient),
+        pdlUrl = environment.pdlUrl,
+        tokendingsService = tokendingsService,
+        pdlClientId = environment.pdlClientId
+    )
 
     embeddedServer(Netty, port = 8080) {
-        personaliaApi(httpClient, NavnService(navnConsumer, tokendingsTokenFetcher), tokenxAuth())
+        personaliaApi(
+            httpClient,
+            navnConsumer,
+            tokenxAuth()
+        )
     }.start(wait = true)
 }
 
 fun Application.personaliaApi(
     httpClient: HttpClient,
-    navnService: NavnService,
+    navnConsumer: NavnConsumer,
     authConfig: Application.() -> Unit
 ) {
     DefaultExports.initialize()
@@ -61,8 +69,7 @@ fun Application.personaliaApi(
             healthApi()
 
             authenticate {
-                identApi()
-                navnApi(navnService)
+                api(navnConsumer)
             }
         }
     }
@@ -82,6 +89,3 @@ private fun Application.configureShutdownHook(httpClient: HttpClient) {
         httpClient.close()
     }
 }
-
-val PipelineContext<*, ApplicationCall>.tokenXUser
-    get() = TokenXUserFactory.createTokenXUser(call)

@@ -5,6 +5,12 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import mu.KotlinLogging
 
+open class QueryRequestException(message: String, cause: Throwable) : Exception(message, cause)
+
+class QueryResponseException(message: String) : Exception(message)
+
+class TransformationException(message: String) : Exception(message)
+
 
 fun StatusPagesConfig.confiureStatusPages() {
     val secureLog = KotlinLogging.logger("secureLog")
@@ -34,9 +40,5 @@ fun StatusPagesConfig.confiureStatusPages() {
     }
 }
 
-open class QueryRequestException(message: String, cause: Throwable) : Exception(message, cause)
 
-class QueryResponseException(message: String) : Exception(message)
-
-class TransformationException(message: String) : Exception(message)
 
