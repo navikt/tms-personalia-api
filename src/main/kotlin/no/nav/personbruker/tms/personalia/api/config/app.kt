@@ -9,10 +9,10 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.defaultheaders.*
+import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.routing.*
 import io.ktor.util.pipeline.*
 import io.prometheus.client.hotspot.DefaultExports
-import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getEnvVar
 import no.nav.personbruker.tms.personalia.api.ident.identApi
 import no.nav.personbruker.tms.personalia.api.navn.NavnConsumer
 import no.nav.personbruker.tms.personalia.api.navn.NavnService
@@ -26,11 +26,14 @@ fun main() {
     val environment = Environment()
 
     val httpClient = HttpClientBuilder.build()
+    val tokendingsService = TokendingsServiceBuilder.buildTokendingsService(maxCachedEntries = 10000)
+    val tokendingsTokenFetcher = TokendingsTokenFetcher(tokendingsService, environment.pdlClientId)
 
-    val navnService = setupNavnService(httpClient, environment.pdlUrl, environment.pdlClientId)
+    val navnConsumer = NavnConsumer(GraphQLKtorClient(URL(environment.pdlUrl), httpClient), environment.pdlUrl)
+
 
     embeddedServer(Netty, port = 8080) {
-        personaliaApi(httpClient, navnService, tokenxAuth())
+        personaliaApi(httpClient, NavnService(navnConsumer, tokendingsTokenFetcher), tokenxAuth())
     }.start(wait = true)
 }
 
@@ -49,6 +52,10 @@ fun Application.personaliaApi(
         json(jsonConfig())
     }
 
+    install(StatusPages) {
+        this.confiureStatusPages()
+    }
+
     routing {
         route("/tms-personalia-api") {
             healthApi()
@@ -63,24 +70,11 @@ fun Application.personaliaApi(
     configureShutdownHook(httpClient)
 }
 
-data class Environment(
-    val pdlUrl: String = getEnvVar("PDL_BASE_URL"),
-    val pdlClientId: String = getEnvVar("PDL_CLIENT_ID")
-)
 
-fun tokenxAuth(): Application.() -> Unit  = {
+fun tokenxAuth(): Application.() -> Unit = {
     installTokenXAuth {
         setAsDefault = true
     }
-}
-
-fun setupNavnService(httpClient: HttpClient, pdlUrl: String, pdlClientId: String): NavnService {
-    val tokendingsService = TokendingsServiceBuilder.buildTokendingsService(maxCachedEntries = 10000)
-    val tokendingsTokenFetcher = TokendingsTokenFetcher(tokendingsService, pdlClientId)
-
-    val navnConsumer = NavnConsumer(GraphQLKtorClient(URL(pdlUrl), httpClient), pdlUrl)
-
-    return NavnService(navnConsumer, tokendingsTokenFetcher)
 }
 
 private fun Application.configureShutdownHook(httpClient: HttpClient) {

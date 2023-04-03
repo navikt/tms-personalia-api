@@ -2,7 +2,7 @@ package no.nav.personbruker.tms.personalia.api.navn
 
 import com.expediagroup.graphql.client.types.GraphQLClientResponse
 import no.nav.pdl.generated.dto.HentNavn
-import no.nav.personbruker.tms.personalia.api.common.exception.TransformationException
+import no.nav.personbruker.tms.personalia.api.config.TransformationException
 
 fun Navn.toInternalNavnDTO(): NavnDTO {
     return NavnDTO(

@@ -8,3 +8,8 @@ data class Navn(
     val mellomnavn: String?,
     val etternavn: String?
 )
+
+@Serializable
+data class NavnDTO(
+    val navn: String?
+)

@@ -8,7 +8,7 @@ import io.ktor.server.routing.*
 import io.prometheus.client.CollectorRegistry
 import io.prometheus.client.exporter.common.TextFormat
 
-fun Route.healthApi(collectorRegistry: CollectorRegistry = CollectorRegistry.defaultRegistry) {
+fun Route.healthApi() {
 
     val pingJsonResponse = """{"ping": "pong"}"""
 

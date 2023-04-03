@@ -5,8 +5,10 @@ import com.expediagroup.graphql.client.types.GraphQLClientError
 import com.expediagroup.graphql.client.types.GraphQLClientResponse
 import io.ktor.client.request.*
 import no.nav.pdl.generated.dto.HentNavn
-import no.nav.personbruker.tms.personalia.api.common.exception.QueryRequestException
-import no.nav.personbruker.tms.personalia.api.common.exception.QueryResponseException
+import no.nav.personbruker.tms.personalia.api.config.QueryRequestException
+import no.nav.personbruker.tms.personalia.api.config.QueryResponseException
+import no.nav.personbruker.tms.personalia.api.config.bearerHeader
+import no.nav.personbruker.tms.personalia.api.config.temaHeader
 import org.slf4j.LoggerFactory
 
 class NavnConsumer (
