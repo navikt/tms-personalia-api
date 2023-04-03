@@ -1,7 +1,8 @@
 package no.nav.personbruker.tms.personalia.api.common.exception
 
-open class QueryRequestException : Exception {
-    constructor() : super()
-    constructor(message: String) : super(message)
-    constructor(message: String, cause: Throwable) : super(message, cause)
-}
+open class QueryRequestException(message: String, cause: Throwable) : Exception(message, cause)
+
+class QueryResponseException(message: String) : Exception(message)
+
+class TransformationException(message: String) : Exception(message)
+

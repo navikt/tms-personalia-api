@@ -23,15 +23,4 @@ fun Route.healthApi(collectorRegistry: CollectorRegistry = CollectorRegistry.def
     get("/internal/isReady") {
         call.respondText(text = "READY", contentType = ContentType.Text.Plain)
     }
-
-    get("/internal/selftest") {
-        call.respond(HttpStatusCode.OK)
-    }
-
-    get("/metrics") {
-        val names = call.request.queryParameters.getAll("name")?.toSet() ?: emptySet()
-        call.respondTextWriter(ContentType.parse(TextFormat.CONTENT_TYPE_004), HttpStatusCode.OK) {
-            TextFormat.write004(this, collectorRegistry.filteredMetricFamilySamples(names))
-        }
-    }
 }
