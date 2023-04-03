@@ -12,6 +12,7 @@ import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.routing.*
 import io.ktor.util.pipeline.*
 import io.prometheus.client.hotspot.DefaultExports
+import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getEnvVar
 import no.nav.personbruker.tms.personalia.api.ident.identApi
 import no.nav.personbruker.tms.personalia.api.navn.NavnConsumer
 import no.nav.personbruker.tms.personalia.api.navn.NavnService
@@ -28,7 +29,7 @@ fun main() {
 
     val navnService = setupNavnService(httpClient, environment.pdlUrl, environment.pdlClientId)
 
-    embeddedServer(Netty, port = environment.port) {
+    embeddedServer(Netty, port = 8080) {
         personaliaApi(httpClient, navnService, tokenxAuth())
     }.start(wait = true)
 }
@@ -61,6 +62,11 @@ fun Application.personaliaApi(
 
     configureShutdownHook(httpClient)
 }
+
+data class Environment(
+    val pdlUrl: String = getEnvVar("PDL_BASE_URL"),
+    val pdlClientId: String = getEnvVar("PDL_CLIENT_ID")
+)
 
 fun tokenxAuth(): Application.() -> Unit  = {
     installTokenXAuth {
