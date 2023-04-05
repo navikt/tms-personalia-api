@@ -15,8 +15,16 @@ plugins {
     application
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+tasks {
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "17"
+    }
+    withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
+    }
 }
 
 repositories {
@@ -52,15 +60,13 @@ dependencies {
     implementation(Prometheus.logback)
 
     testImplementation(Junit.api)
-    testImplementation(Ktor.clientMock)
-    testImplementation(Ktor.clientMockJvm)
-    testImplementation(Kluent.kluent)
+    testImplementation(Ktor2.Test.serverTestHost)
+    testImplementation(TmsKtorTokenSupport.tokenXValidationMock)
     testImplementation(Mockk.mockk)
-    testImplementation(Jjwt.api)
+    testImplementation(Kotest.runnerJunit5)
+    testImplementation(Kotest.assertionsCore)
 
-    testRuntimeOnly(Bouncycastle.bcprovJdk15on)
-    testRuntimeOnly(Jjwt.impl)
-    testRuntimeOnly(Jjwt.jackson)
+
     testRuntimeOnly(Junit.engine)
 }
 
