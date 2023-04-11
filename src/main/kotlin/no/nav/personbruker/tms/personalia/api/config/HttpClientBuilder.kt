@@ -1,8 +1,8 @@
 package no.nav.personbruker.tms.personalia.api.config
 
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import io.ktor.client.engine.*
-import io.ktor.client.engine.apache.Apache
+import io.ktor.client.engine.apache.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*

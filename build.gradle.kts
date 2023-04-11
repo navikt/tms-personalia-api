@@ -15,8 +15,16 @@ plugins {
     application
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+tasks {
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "17"
+    }
+    withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
+    }
 }
 
 repositories {
@@ -38,10 +46,13 @@ dependencies {
     implementation(Ktor2.Serialization.kotlinX)
     implementation(Ktor2.Server.contentNegotiation)
     implementation(Ktor2.Server.netty)
+    implementation(Ktor2.Server.statusPages)
     implementation(DittNAVCommonLib.utils)
     implementation(TmsKtorTokenSupport.tokendingsExchange)
     implementation(TmsKtorTokenSupport.tokenXValidation)
     implementation(Logstash.logbackEncoder)
+    implementation(Logback.classic)
+    implementation(KotlinLogging.logging)
     implementation(GraphQL6.kotlinKtorClient)
     implementation(NAV.tokenValidatorKtor)
     implementation(Prometheus.common)
@@ -49,20 +60,18 @@ dependencies {
     implementation(Prometheus.logback)
 
     testImplementation(Junit.api)
-    testImplementation(Ktor.clientMock)
-    testImplementation(Ktor.clientMockJvm)
-    testImplementation(Kluent.kluent)
+    testImplementation(Ktor2.Test.serverTestHost)
+    testImplementation(TmsKtorTokenSupport.tokenXValidationMock)
     testImplementation(Mockk.mockk)
-    testImplementation(Jjwt.api)
+    testImplementation(Kotest.runnerJunit5)
+    testImplementation(Kotest.assertionsCore)
 
-    testRuntimeOnly(Bouncycastle.bcprovJdk15on)
-    testRuntimeOnly(Jjwt.impl)
-    testRuntimeOnly(Jjwt.jackson)
+
     testRuntimeOnly(Junit.engine)
 }
 
 application {
-    mainClass.set("no.nav.personbruker.tms.personalia.api.config.AppKt")
+    mainClass.set("no.nav.personbruker.tms.personalia.api.AppKt")
 }
 
 tasks {
