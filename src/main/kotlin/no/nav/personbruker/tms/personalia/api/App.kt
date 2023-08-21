@@ -13,15 +13,15 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.routing.*
 import io.ktor.util.pipeline.*
 import io.prometheus.client.hotspot.DefaultExports
+import nav.no.tms.common.metrics.installTmsMicrometerMetrics
 import no.nav.personbruker.tms.personalia.api.config.Environment
 import no.nav.personbruker.tms.personalia.api.config.HttpClientBuilder
-import no.nav.personbruker.tms.personalia.api.config.confiureStatusPages
+import no.nav.personbruker.tms.personalia.api.config.configureStatusPages
 import no.nav.personbruker.tms.personalia.api.config.healthApi
 import no.nav.personbruker.tms.personalia.api.config.jsonConfig
 import no.nav.personbruker.tms.personalia.api.navn.NavnConsumer
 import no.nav.tms.token.support.tokendings.exchange.TokendingsServiceBuilder
 import no.nav.tms.token.support.tokenx.validation.installTokenXAuth
-import no.nav.tms.token.support.tokenx.validation.user.TokenXUserFactory
 import java.net.URL
 
 fun main() {
@@ -36,13 +36,23 @@ fun main() {
         pdlClientId = environment.pdlClientId
     )
 
-    embeddedServer(Netty, port = 8080) {
-        personaliaApi(
-            httpClient,
-            navnConsumer,
-            tokenxAuth()
-        )
-    }.start(wait = true)
+    embeddedServer(
+        factory = Netty,
+        environment = applicationEngineEnvironment {
+            rootPath = "tms-personalia-api"
+
+            module {
+                personaliaApi(
+                    httpClient,
+                    navnConsumer,
+                    tokenxAuth()
+                )
+            }
+            connector {
+                port = 8080
+            }
+        }
+    ).start(wait = true)
 }
 
 fun Application.personaliaApi(
@@ -61,16 +71,19 @@ fun Application.personaliaApi(
     }
 
     install(StatusPages) {
-        this.confiureStatusPages()
+        configureStatusPages()
+    }
+
+    installTmsMicrometerMetrics {
+        installMicrometerPlugin = true
+        setupMetricsRoute = true
     }
 
     routing {
-        route("/tms-personalia-api") {
-            healthApi()
+        healthApi()
 
-            authenticate {
-                api(navnConsumer)
-            }
+        authenticate {
+            api(navnConsumer)
         }
     }
 

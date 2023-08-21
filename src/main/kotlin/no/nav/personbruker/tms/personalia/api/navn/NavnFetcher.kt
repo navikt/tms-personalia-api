@@ -4,7 +4,7 @@ import com.expediagroup.graphql.client.ktor.GraphQLKtorClient
 import com.expediagroup.graphql.client.types.GraphQLClientResponse
 import io.ktor.client.request.*
 import io.ktor.http.*
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import no.nav.pdl.generated.dto.HentNavn
 import no.nav.personbruker.tms.personalia.api.config.QueryRequestException
 import no.nav.personbruker.tms.personalia.api.config.QueryResponseException
@@ -45,7 +45,7 @@ class NavnConsumer(
     private fun checkForErrors(response: GraphQLClientResponse<HentNavn.Result>) {
         response.errors?.let { errors ->
             if (errors.isNotEmpty()) {
-                log.warn("Feil i GraphQL-responsen: $errors")
+                log.warn { "Feil i GraphQL-responsen: $errors" }
                 throw QueryResponseException("Feil i responsen under henting av navn")
             }
         }
