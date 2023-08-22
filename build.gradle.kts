@@ -28,44 +28,39 @@ tasks {
 }
 
 repositories {
-    mavenCentral()
-    maven("https://jitpack.io")
     mavenLocal()
+    maven("https://jitpack.io")
+    mavenCentral()
 }
 
 dependencies {
     implementation(JacksonDatatype.datatypeJsr310)
     implementation(Kotlinx.coroutines)
-    implementation(Kotlinx.htmlJvm)
     implementation(KotlinLogging.logging)
-    implementation(Ktor2.Server.auth)
-    implementation(Ktor2.Server.authJwt)
-    implementation(Ktor2.Server.defaultHeaders)
-    implementation(Ktor2.Client.apache)
-    implementation(Ktor2.Client.contentNegotiation)
-    implementation(Ktor2.Serialization.kotlinX)
-    implementation(Ktor2.Server.contentNegotiation)
-    implementation(Ktor2.Server.netty)
-    implementation(Ktor2.Server.statusPages)
+    implementation(Ktor.Server.auth)
+    implementation(Ktor.Server.defaultHeaders)
+    implementation(Ktor.Client.apache)
+    implementation(Ktor.Client.contentNegotiation)
+    implementation(Ktor.Serialization.kotlinX)
+    implementation(Ktor.Server.contentNegotiation)
+    implementation(Ktor.Server.netty)
+    implementation(Ktor.Server.statusPages)
     implementation(DittNAVCommonLib.utils)
     implementation(TmsKtorTokenSupport.tokendingsExchange)
     implementation(TmsKtorTokenSupport.tokenXValidation)
     implementation(Logstash.logbackEncoder)
-    implementation(Logback.classic)
     implementation(KotlinLogging.logging)
-    implementation(GraphQL6.kotlinKtorClient)
-    implementation(NAV.tokenValidatorKtor)
+    implementation(GraphQL.kotlinKtorClient)
     implementation(Prometheus.common)
     implementation(Prometheus.hotspot)
-    implementation(Prometheus.logback)
+    implementation(TmsCommonLib.commonLib)
 
     testImplementation(Junit.api)
-    testImplementation(Ktor2.Test.serverTestHost)
+    testImplementation(Ktor.Test.serverTestHost)
     testImplementation(TmsKtorTokenSupport.tokenXValidationMock)
     testImplementation(Mockk.mockk)
     testImplementation(Kotest.runnerJunit5)
     testImplementation(Kotest.assertionsCore)
-
 
     testRuntimeOnly(Junit.engine)
 }

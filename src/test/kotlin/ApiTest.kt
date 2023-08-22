@@ -14,7 +14,7 @@ import io.mockk.mockk
 import no.nav.personbruker.tms.personalia.api.navn.NavnConsumer
 import no.nav.personbruker.tms.personalia.api.personaliaApi
 import no.nav.tms.token.support.tokendings.exchange.TokendingsService
-import no.nav.tms.token.support.tokenx.validation.mock.SecurityLevel
+import no.nav.tms.token.support.tokenx.validation.mock.LevelOfAssurance
 import no.nav.tms.token.support.tokenx.validation.mock.installTokenXAuthMock
 import org.junit.jupiter.api.Test
 import java.net.URL
@@ -25,7 +25,7 @@ class ApiTest {
     @Test
     fun ident() = testApplication {
         testApi()
-        client.get("/tms-personalia-api/ident").apply {
+        client.get("/ident").apply {
             status shouldBe HttpStatusCode.OK
             objectmapper.readTree(bodyAsText())["ident"].asText() shouldBe "12345678910"
         }
@@ -49,7 +49,7 @@ class ApiTest {
             }
         }
 
-        client.get("/tms-personalia-api/navn").apply {
+        client.get("/navn").apply {
             status shouldBe HttpStatusCode.OK
             objectmapper.readTree(bodyAsText())["navn"].asText() shouldBe "Packup Your Troubles"
         }
@@ -73,7 +73,7 @@ class ApiTest {
             installTokenXAuthMock {
                 setAsDefault = true
                 staticUserPid = "12345678910"
-                staticSecurityLevel = SecurityLevel.LEVEL_4
+                staticLevelOfAssurance = LevelOfAssurance.LEVEL_4
                 alwaysAuthenticated = true
             }
         })

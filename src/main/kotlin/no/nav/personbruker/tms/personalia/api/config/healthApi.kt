@@ -1,12 +1,9 @@
 package no.nav.personbruker.tms.personalia.api.config
 
 import io.ktor.http.ContentType
-import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.prometheus.client.CollectorRegistry
-import io.prometheus.client.exporter.common.TextFormat
 
 fun Route.healthApi() {
 
