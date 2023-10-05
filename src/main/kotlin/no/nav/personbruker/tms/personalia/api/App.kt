@@ -21,7 +21,7 @@ import no.nav.personbruker.tms.personalia.api.config.healthApi
 import no.nav.personbruker.tms.personalia.api.config.jsonConfig
 import no.nav.personbruker.tms.personalia.api.navn.NavnConsumer
 import no.nav.tms.token.support.tokendings.exchange.TokendingsServiceBuilder
-import no.nav.tms.token.support.tokenx.validation.installTokenXAuth
+import no.nav.tms.token.support.tokenx.validation.tokenX
 import java.net.URL
 
 fun main() {
@@ -92,8 +92,10 @@ fun Application.personaliaApi(
 
 
 fun tokenxAuth(): Application.() -> Unit = {
-    installTokenXAuth {
-        setAsDefault = true
+    authentication {
+        tokenX {
+            setAsDefault = true
+        }
     }
 }
 
