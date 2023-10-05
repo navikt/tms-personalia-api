@@ -6,6 +6,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.testing.*
@@ -15,7 +16,7 @@ import no.nav.personbruker.tms.personalia.api.navn.NavnConsumer
 import no.nav.personbruker.tms.personalia.api.personaliaApi
 import no.nav.tms.token.support.tokendings.exchange.TokendingsService
 import no.nav.tms.token.support.tokenx.validation.mock.LevelOfAssurance
-import no.nav.tms.token.support.tokenx.validation.mock.installTokenXAuthMock
+import no.nav.tms.token.support.tokenx.validation.mock.tokenXMock
 import org.junit.jupiter.api.Test
 import java.net.URL
 
@@ -70,11 +71,13 @@ class ApiTest {
             },
             pdlClientId = "pdl.test.id"
         ), authConfig = {
-            installTokenXAuthMock {
-                setAsDefault = true
-                staticUserPid = "12345678910"
-                staticLevelOfAssurance = LevelOfAssurance.LEVEL_4
-                alwaysAuthenticated = true
+            authentication {
+                tokenXMock {
+                    setAsDefault = true
+                    staticUserPid = "12345678910"
+                    staticLevelOfAssurance = LevelOfAssurance.LEVEL_4
+                    alwaysAuthenticated = true
+                }
             }
         })
     }
